@@ -5,7 +5,7 @@ from optparse import make_option
 
 from django.conf import settings
 from django.core.handlers.wsgi import WSGIHandler
-from django.core.servers.basehttp import run, WSGIServerException
+from django.core.servers.basehttp import run
 from django.core.management.base import BaseCommand, CommandError
 
 from staticfiles.handlers import StaticFilesHandler
@@ -97,7 +97,7 @@ except ImportError:
                 try:
                     handler = self.get_handler(*args, **options)
                     run(addr, int(port), handler)
-                except WSGIServerException, e:
+                except Exception, e:
                     # Use helpful error messages instead of ugly tracebacks.
                     ERRORS = {
                         13: "You don't have permission to access that port.",
